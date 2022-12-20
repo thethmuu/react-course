@@ -3,6 +3,7 @@ import { useQuery } from 'urql';
 import { useRouter } from 'next/router';
 import { GET_PRODUCT } from '../../graphql/query';
 import styled from 'styled-components';
+import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 
 const ProductDetails = () => {
   const { query } = useRouter();
@@ -19,21 +20,22 @@ const ProductDetails = () => {
 
   return (
     <ProductDetailsStyled>
-      <ImageWrapper>
-        <img src={image.data.attributes.formats.medium.url} alt={title} />
-      </ImageWrapper>
+      <img src={image.data.attributes.formats.medium.url} alt={title} />
+
       <ProductInfo>
-        <h3>{title}</h3>
+        <h2>{title}</h2>
         <p>{description}</p>
         <Quantity>
           <span>Quantity</span>
-          <button>Minus</button>
+          <button>
+            <AiFillMinusCircle />
+          </button>
           <p>0</p>
-          <button>Plus</button>
+          <button>
+            <AiFillPlusCircle />
+          </button>
         </Quantity>
-        <CartButtonStyled>
-          <button>Add to Cart</button>
-        </CartButtonStyled>
+        <CartButtonStyled>Add to Cart</CartButtonStyled>
       </ProductInfo>
     </ProductDetailsStyled>
   );
@@ -45,18 +47,15 @@ const ProductDetailsStyled = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
-`;
 
-const ImageWrapper = styled.div`
-  width: 40%;
   img {
-    width: 100%;
+    width: 40%;
   }
 `;
 
 const ProductInfo = styled.div`
   width: 40%;
-  h3 {
+  h2 {
     color: var(--primary);
     margin-bottom: 1rem;
   }
@@ -66,8 +65,8 @@ const ProductInfo = styled.div`
   button {
     font-size: 1rem;
     font-weight: medium;
-    color: white;
-    background-color: var(--primary);
+    /* color: white;
+    background-color: var(--primary); */
     padding: 0.5em 1rem;
   }
 `;
@@ -78,9 +77,11 @@ const Quantity = styled.div`
   margin: 1rem 0;
 
   button {
+    background-color: transparent;
     border: none;
     display: flex;
     font-size: 1.5rem;
+    cursor: pointer;
   }
 
   p {
@@ -91,14 +92,13 @@ const Quantity = styled.div`
   span {
     color: var(--secondary);
   }
-  
+
   svg {
     color: #494949;
   }
 `;
 
-const CartButtonStyled = styled.div`
-  display: flex;
+const CartButtonStyled = styled.button`
   button {
     flex: 1;
     background-color: var(--primary);
