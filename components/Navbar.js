@@ -3,18 +3,22 @@ import React from 'react';
 import { FiShoppingBag } from 'react-icons/fi';
 import styled from 'styled-components';
 
+import { useStoreContext } from '../lib/context';
+
 import Cart from './Cart';
 
 const Navbar = () => {
+  const { showCart, setShowCart } = useStoreContext();
   return (
     <NavStyled>
       <Link href='/'>Y.E.C Store</Link>
       <NavItems>
-        <li>
+        <li onClick={() => setShowCart(true)}>
           <FiShoppingBag />
+          <h3>Cart</h3>
         </li>
       </NavItems>
-      <Cart />
+      {showCart ? <Cart /> : null}
     </NavStyled>
   );
 };

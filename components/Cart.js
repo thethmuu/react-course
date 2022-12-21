@@ -5,9 +5,10 @@ import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import styled from 'styled-components';
 
 const Cart = () => {
-  const { setShowCart, cartItems, handleOnAdd } = useStoreContext();
+  const { setShowCart, cartItems, handleOnAdd, handleOnRemove } =
+    useStoreContext();
   return (
-    <CartWrapper>
+    <CartWrapper onClick={() => setShowCart(false)}>
       <CartStyled>
         {cartItems.length < 1 ? (
           <EmptyStyled>
@@ -24,11 +25,11 @@ const Cart = () => {
                 />
                 <Quantity>
                   <span>Quantity</span>
-                  <button onClick={decreaseQty}>
+                  <button onClick={handleOnRemove(item)}>
                     <AiFillMinusCircle />
                   </button>
-                  <p>{productQty}</p>
-                  <button onClick={increaseQty}>
+                  <p>{item.quantity}</p>
+                  <button>
                     <AiFillPlusCircle />
                   </button>
                 </Quantity>
