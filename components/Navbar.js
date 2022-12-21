@@ -3,6 +3,8 @@ import React from 'react';
 import { FiShoppingBag } from 'react-icons/fi';
 import styled from 'styled-components';
 
+import Cart from './Cart';
+
 const Navbar = () => {
   return (
     <NavStyled>
@@ -12,6 +14,7 @@ const Navbar = () => {
           <FiShoppingBag />
         </li>
       </NavItems>
+      <Cart />
     </NavStyled>
   );
 };
