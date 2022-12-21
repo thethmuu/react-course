@@ -56,7 +56,6 @@ const ProductDetailsStyled = styled.div`
 const ProductInfo = styled.div`
   width: 40%;
   button {
-    width: 100%;
     padding: 0.5rem 1rem;
     font-size: 1rem;
     font-weight: 500;
@@ -64,10 +63,6 @@ const ProductInfo = styled.div`
     color: white;
     border: none;
     cursor: pointer;
-    &:hover {
-      background-color: black;
-      box-shadow: 1px 2px 3px #ccc;
-    }
   }
 `;
 
@@ -94,10 +89,13 @@ const Quantity = styled.div`
 `;
 
 const CartButtonStyled = styled.button`
-  button {
-    width: 100%;
-    background: var(--primary);
-    color: white;
-    font-weight: 500;
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  font-weight: 500;
+
+  &:hover, &:active {
+    background-color: black;
+    box-shadow: 1px 2px 3px #ccc;
   }
 `;
