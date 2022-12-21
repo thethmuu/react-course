@@ -1,2 +1,3 @@
-# react-course
-Exercises and Projects for CreaThit React Class
+### Basketball Teams App
+
+React app with complete routing system for learning purpose
