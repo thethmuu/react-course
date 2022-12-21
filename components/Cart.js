@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStoreContext } from '../lib/context';
 import { FaShoppingCart } from 'react-icons/fa';
+import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import styled from 'styled-components';
 
 const Cart = () => {
@@ -101,6 +102,28 @@ export const EmptyStyled = styled.div`
   svg {
     font-size: 10rem;
     color: var(--secondary);
+  }
+`;
+
+const Quantity = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 1rem 0rem;
+  button {
+    background: transparent;
+    border: none;
+    display: flex;
+    font-size: 1.5rem;
+  }
+  p {
+    width: 1rem;
+    text-align: center;
+  }
+  span {
+    color: var(--secondary);
+  }
+  svg {
+    color: #494949;
   }
 `;
 
