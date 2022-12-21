@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useQuery } from 'urql';
 import { useRouter } from 'next/router';
 import { GET_PRODUCT } from '../../graphql/query';
 import styled from 'styled-components';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
+import { useStoreContext } from '../../lib/context';
 
 const ProductDetails = () => {
   const { query } = useRouter();
+  const { productQty, cartItems, increaseQty, decreaseQty, handleOnAdd } =
+    useStoreContext();
 
   const [results] = useQuery({
     query: GET_PRODUCT,
@@ -27,15 +30,17 @@ const ProductDetails = () => {
         <p>{description}</p>
         <Quantity>
           <span>Quantity</span>
-          <button>
+          <button onClick={decreaseQty}>
             <AiFillMinusCircle />
           </button>
-          <p>0</p>
-          <button>
+          <p>{productQty}</p>
+          <button onClick={increaseQty}>
             <AiFillPlusCircle />
           </button>
         </Quantity>
-        <CartButtonStyled>Add to Cart</CartButtonStyled>
+        <CartButtonStyled onClick={() => handleOnAdd(product, productQty)}>
+          Add to Cart
+        </CartButtonStyled>
       </ProductInfo>
     </ProductDetailsStyled>
   );
@@ -94,7 +99,8 @@ const CartButtonStyled = styled.button`
   color: white;
   font-weight: 500;
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     background-color: black;
     box-shadow: 1px 2px 3px #ccc;
   }
