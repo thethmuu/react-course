@@ -2,8 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   compiler: {
-    styledComponents: true
-  }
-}
+    styledComponents: true,
+  },
+  // for using with cloudinary image src and Next Image component
+  // images: {
+  //   domains: ['res.cloudinary.com'],
+  // },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

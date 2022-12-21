@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { GET_PRODUCT } from '../../graphql/query';
 import styled from 'styled-components';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
+import Image from 'next/image';
 import { useStoreContext } from '../../lib/context';
 
 const ProductDetails = () => {
@@ -20,10 +21,18 @@ const ProductDetails = () => {
   if (error) return <p>Ugh.. {error.message}</p>;
   const product = data.products.data[0].attributes;
   const { title, description, image, slug } = product;
+  const { url, width, height } = image.data.attributes.formats.medium;
 
   return (
     <ProductDetailsStyled>
-      <img src={image.data.attributes.formats.medium.url} alt={title} />
+      {/* for Next Image component */}
+      {/* <Image
+        src={url}
+        alt={title}
+        width={width}
+        height={height}
+      /> */}
+      <img src={url} alt={title} />
 
       <ProductInfo>
         <h2>{title}</h2>
