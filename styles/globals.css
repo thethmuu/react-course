@@ -11,10 +11,11 @@
   box-sizing: border-box;
 }
 
-html,
 body {
   font-family: 'Quicksand', sans-serif;
   background-color: #f1f1f1;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 h2 {

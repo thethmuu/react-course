@@ -46,7 +46,7 @@ export default ProductDetails;
 const ProductDetailsStyled = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 5rem;
 
   img {
     width: 40%;
@@ -55,44 +55,39 @@ const ProductDetailsStyled = styled.div`
 
 const ProductInfo = styled.div`
   width: 40%;
-  h2 {
-    color: var(--primary);
-    margin-bottom: 1rem;
-  }
-  p {
-    color: var(--secondary);
-  }
   button {
+    width: 100%;
+    padding: 0.5rem 1rem;
     font-size: 1rem;
-    font-weight: medium;
-    /* color: white;
-    background-color: var(--primary); */
-    padding: 0.5em 1rem;
+    font-weight: 500;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background-color: black;
+      box-shadow: 1px 2px 3px #ccc;
+    }
   }
 `;
 
 const Quantity = styled.div`
   display: flex;
   align-items: center;
-  margin: 1rem 0;
-
+  margin: 1rem 0rem;
   button {
-    background-color: transparent;
+    background: transparent;
     border: none;
     display: flex;
     font-size: 1.5rem;
-    cursor: pointer;
   }
-
   p {
     width: 1rem;
     text-align: center;
   }
-
   span {
     color: var(--secondary);
   }
-
   svg {
     color: #494949;
   }
@@ -100,9 +95,9 @@ const Quantity = styled.div`
 
 const CartButtonStyled = styled.button`
   button {
-    flex: 1;
-    background-color: var(--primary);
+    width: 100%;
+    background: var(--primary);
     color: white;
-    font-weight: bold;
+    font-weight: 500;
   }
 `;
