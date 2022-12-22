@@ -1,24 +1,51 @@
+'use client';
 import React from 'react';
 import { useStoreContext } from '../lib/context';
 import { FaShoppingCart } from 'react-icons/fa';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import styled from 'styled-components';
+// import { motion } from 'framer-motion';
+const { motion } = require('framer-motion');
 
 const Cart = () => {
   const { setShowCart, cartItems, handleOnAdd, handleOnRemove, totalPrice } =
     useStoreContext();
   return (
-    <CartWrapper onClick={() => setShowCart(false)}>
-      <CartStyled onClick={(e) => e.stopPropagation()}>
+    <CartWrapper
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setShowCart(false)}
+    >
+      <CartStyled
+        as={motion.div}
+        initial={{ x: '50%' }}
+        animate={{ x: 0 }}
+        exit={{ x: '50%' }}
+        transition={{ type: 'tween' }}
+        onClick={(e) => e.stopPropagation()}
+      >
         {cartItems.length < 1 ? (
-          <EmptyStyled>
+          <EmptyStyled
+            as={motion.div}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
             <h1>Shop more and add products to cart 😇</h1>
             <FaShoppingCart />
           </EmptyStyled>
         ) : null}
         {cartItems.length >= 1
           ? cartItems.map((item) => (
-              <Card key={item.slug}>
+              <Card
+                as={motion.div}
+                key={item.slug}
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+              >
                 <img
                   src={item.image.data.attributes.formats.small.url}
                   alt={item.title}
@@ -55,7 +82,7 @@ const Cart = () => {
 
 export default Cart;
 
-export const CartWrapper = styled.div`
+const CartWrapper = styled.div`
   position: fixed;
   right: 0;
   top: 0;
@@ -67,7 +94,7 @@ export const CartWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-export const CartStyled = styled.div`
+const CartStyled = styled.div`
   width: 40%;
   background: #f1f1f1;
   padding: 2rem 3rem;
@@ -75,9 +102,7 @@ export const CartStyled = styled.div`
   position: relative;
 `;
 
-export const CartItemsStyle = styled.div``;
-
-export const Card = styled.div`
+const Card = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -91,7 +116,7 @@ export const Card = styled.div`
   }
 `;
 
-export const CardInfo = styled.div`
+const CardInfo = styled.div`
   width: 50%;
   div {
     display: flex;
@@ -99,21 +124,18 @@ export const CardInfo = styled.div`
   }
 `;
 
-export const EmptyStyled = styled.div`
+const EmptyStyled = styled.div`
   /* For the empty cart */
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  /*  */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 100%;
+  width: 80%;
   svg {
-    font-size: 10rem;
+    font-size: 8rem;
     color: var(--secondary);
   }
 `;
@@ -140,13 +162,21 @@ const Quantity = styled.div`
   }
 `;
 
-export const Checkout = styled.div`
+const Checkout = styled.div`
   button {
-    background: var(--primary);
-    padding: 1rem 2rem;
     width: 100%;
-    color: white;
     margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    background-color: var(--primary);
+    color: white;
+    border: none;
     cursor: pointer;
+
+    &:hover,
+    &:active {
+      background-color: black;
+      box-shadow: 1px 2px 3px #ccc;
+    }
   }
 `;

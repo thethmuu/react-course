@@ -1,7 +1,9 @@
+'use client';
 import Link from 'next/link';
 import React from 'react';
 import { FiShoppingBag } from 'react-icons/fi';
 import styled from 'styled-components';
+const { AnimatePresence } = require('framer-motion');
 
 import { useStoreContext } from '../lib/context';
 
@@ -19,7 +21,7 @@ const Navbar = () => {
           <h3>Cart</h3>
         </li>
       </NavItems>
-      {showCart ? <Cart /> : null}
+      <AnimatePresence>{showCart ? <Cart /> : null}</AnimatePresence>
     </NavStyled>
   );
 };
