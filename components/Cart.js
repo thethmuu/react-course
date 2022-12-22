@@ -9,7 +9,7 @@ const Cart = () => {
     useStoreContext();
   return (
     <CartWrapper onClick={() => setShowCart(false)}>
-      <CartStyled>
+      <CartStyled onClick={(e) => e.stopPropagation()}>
         {cartItems.length < 1 ? (
           <EmptyStyled>
             <h1>Shop more and add products to cart 😇</h1>
@@ -32,7 +32,7 @@ const Cart = () => {
                       <AiFillMinusCircle />
                     </button>
                     <p>{item.quantity}</p>
-                    <button>
+                    <button onClick={() => handleOnAdd(item, 1)}>
                       <AiFillPlusCircle />
                     </button>
                   </Quantity>
