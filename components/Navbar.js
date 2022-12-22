@@ -42,6 +42,9 @@ const NavItems = styled.ul`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  li {
+    list-style: none;
+  }
   div {
     margin-left: 3rem;
     position: relative;

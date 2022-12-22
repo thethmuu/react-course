@@ -18,22 +18,26 @@ const Cart = () => {
         ) : null}
         {cartItems.length >= 1
           ? cartItems.map((item) => (
-              <div key={item.slug}>
+              <Card key={item.slug}>
                 <img
                   src={item.image.data.attributes.formats.small.url}
                   alt={item.title}
                 />
-                <Quantity>
-                  <span>Quantity</span>
-                  <button onClick={handleOnRemove(item)}>
-                    <AiFillMinusCircle />
-                  </button>
-                  <p>{item.quantity}</p>
-                  <button>
-                    <AiFillPlusCircle />
-                  </button>
-                </Quantity>
-              </div>
+                <CardInfo>
+                  <h3>{item.title}</h3>
+                  <h3>{item.price}$</h3>
+                  <Quantity>
+                    <span>Quantity</span>
+                    <button onClick={() => handleOnRemove(item)}>
+                      <AiFillMinusCircle />
+                    </button>
+                    <p>{item.quantity}</p>
+                    <button>
+                      <AiFillPlusCircle />
+                    </button>
+                  </Quantity>
+                </CardInfo>
+              </Card>
             ))
           : null}
       </CartStyled>
@@ -58,7 +62,7 @@ export const CartWrapper = styled.div`
 export const CartStyled = styled.div`
   width: 40%;
   background: #f1f1f1;
-  padding: 2rem 5rem;
+  padding: 2rem 3rem;
   overflow-y: scroll;
   position: relative;
 `;
@@ -69,10 +73,10 @@ export const Card = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 1rem;
+  border-radius: 12px;
   overflow: hidden;
   background: white;
-  padding: 2rem;
+  padding: 1rem 2rem;
   margin: 2rem 0rem;
   img {
     width: 8rem;

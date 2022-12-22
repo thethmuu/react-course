@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
 import { useQuery } from 'urql';
+import styled from 'styled-components';
 import { GET_PRODUCTS } from '../graphql/query';
 import Product from '../components/Product';
-import styled from 'styled-components';
 
 const inter = Inter({ subsets: ['latin'] });
 
