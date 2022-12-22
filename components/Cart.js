@@ -5,7 +5,7 @@ import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import styled from 'styled-components';
 
 const Cart = () => {
-  const { setShowCart, cartItems, handleOnAdd, handleOnRemove } =
+  const { setShowCart, cartItems, handleOnAdd, handleOnRemove, totalPrice } =
     useStoreContext();
   return (
     <CartWrapper onClick={() => setShowCart(false)}>
@@ -40,6 +40,14 @@ const Cart = () => {
               </Card>
             ))
           : null}
+        <Checkout>
+          {cartItems.length > 0 ? (
+            <div>
+              <h3>Subtotal ${totalPrice}</h3>
+              <button>Purchase</button>
+            </div>
+          ) : null}
+        </Checkout>
       </CartStyled>
     </CartWrapper>
   );

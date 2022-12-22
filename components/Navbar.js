@@ -8,12 +8,13 @@ import { useStoreContext } from '../lib/context';
 import Cart from './Cart';
 
 const Navbar = () => {
-  const { showCart, setShowCart } = useStoreContext();
+  const { showCart, setShowCart, totalQuantity } = useStoreContext();
   return (
     <NavStyled>
       <Link href='/'>Y.E.C Store</Link>
       <NavItems>
         <li onClick={() => setShowCart(true)}>
+          {totalQuantity > 0 ? <span>{totalQuantity}</span> : null}
           <FiShoppingBag />
           <h3>Cart</h3>
         </li>
