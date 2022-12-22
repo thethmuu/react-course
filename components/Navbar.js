@@ -43,14 +43,12 @@ const NavItems = styled.ul`
   align-items: center;
   justify-content: space-around;
   li {
-    list-style: none;
-  }
-  div {
     margin-left: 3rem;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    list-style: none;
     cursor: pointer;
   }
   h3 {
