@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { useQuery } from 'urql';
 import { useRouter } from 'next/router';
-import { GET_PRODUCT } from '../../graphql/query';
+import { GET_PRODUCT } from 'graphql/query';
 import styled from 'styled-components';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
-import Image from 'next/image';
-import { useStoreContext } from '../../lib/context';
+import { useStoreContext } from 'lib/context';
 
 const ProductDetails = () => {
   const { query } = useRouter();

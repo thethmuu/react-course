@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { HiShoppingBag } from 'react-icons/hi2';
 import styled from 'styled-components';
-const { AnimatePresence, motion } = require('framer-motion');
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { useStoreContext } from '../lib/context';
 

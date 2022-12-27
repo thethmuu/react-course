@@ -1,11 +1,7 @@
-import Head from 'next/head';
-import { Inter } from '@next/font/google';
 import { useQuery } from 'urql';
 import styled from 'styled-components';
-import { GET_PRODUCTS } from '../graphql/query';
-import Product from '../components/Product';
-
-const inter = Inter({ subsets: ['latin'] });
+import { GET_PRODUCTS } from 'graphql/query';
+import Product from 'components/Product';
 
 export default function Home() {
   const [results] = useQuery({ query: GET_PRODUCTS });

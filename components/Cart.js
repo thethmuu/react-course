@@ -1,11 +1,10 @@
 'use client';
 import React from 'react';
-import { useStoreContext } from '../lib/context';
+import { useStoreContext } from 'lib/context';
 import { FaShoppingCart } from 'react-icons/fa';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import styled from 'styled-components';
-// import { motion } from 'framer-motion';
-const { motion } = require('framer-motion');
+import { motion } from 'framer-motion';
 
 const Cart = () => {
   const { setShowCart, cartItems, handleOnAdd, handleOnRemove, totalPrice } =
