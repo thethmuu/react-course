@@ -1,9 +1,9 @@
 'use client';
 import Link from 'next/link';
 import React from 'react';
-import { FiShoppingBag } from 'react-icons/fi';
+import { HiShoppingBag } from 'react-icons/hi2';
 import styled from 'styled-components';
-const { AnimatePresence } = require('framer-motion');
+const { AnimatePresence, motion } = require('framer-motion');
 
 import { useStoreContext } from '../lib/context';
 
@@ -15,10 +15,17 @@ const Navbar = () => {
     <NavStyled>
       <Link href='/'>Y.E.C Store</Link>
       <NavItems>
-        <li onClick={() => setShowCart(true)}>
-          {totalQuantity > 0 ? <span>{totalQuantity}</span> : null}
-          <FiShoppingBag />
-          <h3>Cart</h3>
+        <li
+          onClick={() => setShowCart(true)}
+          className='p-2 text-red-700 bg-red-100 rounded-lg shadow hover:shadow-md hover:bg-red-200'
+        >
+          {totalQuantity > 0 ? (
+            <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}>
+              {totalQuantity}
+            </motion.span>
+          ) : null}
+          <HiShoppingBag />
+          {/* <h3>Cart</h3> */}
         </li>
       </NavItems>
       <AnimatePresence>{showCart ? <Cart /> : null}</AnimatePresence>

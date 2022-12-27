@@ -19,6 +19,7 @@ const Cart = () => {
       onClick={() => setShowCart(false)}
     >
       <CartStyled
+        layout
         as={motion.div}
         initial={{ x: '50%' }}
         animate={{ x: 0 }}
@@ -38,13 +39,14 @@ const Cart = () => {
           </EmptyStyled>
         ) : null}
         {cartItems.length >= 1
-          ? cartItems.map((item) => (
+          ? cartItems.map((item, index) => (
               <Card
+                layout
                 as={motion.div}
                 key={item.slug}
                 initial={{ opacity: 0, scale: 0.7 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.3 * index }}
               >
                 <img
                   src={item.image.data.attributes.formats.small.url}
@@ -67,7 +69,7 @@ const Cart = () => {
               </Card>
             ))
           : null}
-        <Checkout>
+        <Checkout layout>
           {cartItems.length > 0 ? (
             <div>
               <h3>Subtotal ${totalPrice}</h3>
