@@ -8,6 +8,16 @@ export default async function stripeHandler(req, res) {
       const session = await stripe.checkout.sessions.create({
         mode: 'payment',
         payment_method_types: ['card'],
+        shipping_address_collection: {
+          allowed_countries: ['MM', 'SG', 'US', 'TH'],
+        },
+        shipping_options: [
+          { shipping_rate: 'shr_1MJx4aFTFxqgVMnb1DPgu1VH' },
+          {
+            shipping_rate: 'shr_1MJwsrFTFxqgVMnbc0YCOYvE',
+          },
+        ],
+        allow_promotion_codes: true,
         line_items: req.body.map((item) => {
           return {
             price_data: {
@@ -19,6 +29,10 @@ export default async function stripeHandler(req, res) {
               unit_amount: item.price * 100,
             },
             quantity: item.quantity,
+            adjustable_quantity: {
+              enabled: true,
+              minimum: 1
+            }
           };
         }),
         success_url: `${req.headers.origin}/success`,
