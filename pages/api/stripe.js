@@ -1,5 +1,3 @@
-import { isTypeNode } from 'graphql';
-
 const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default async function stripeHandler(req, res) {
@@ -35,7 +33,7 @@ export default async function stripeHandler(req, res) {
             }
           };
         }),
-        success_url: `${req.headers.origin}/success`,
+        success_url: `${req.headers.origin}/success?&sessionId={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/canceled`,
       });
       res.status(200).json(session);
