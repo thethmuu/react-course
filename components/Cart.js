@@ -5,10 +5,24 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import connectStripe from 'lib/connectStripe';
 
 const Cart = () => {
   const { setShowCart, cartItems, handleOnAdd, handleOnRemove, totalPrice } =
     useStoreContext();
+
+  const handleCheckout = async () => {
+    const stripe = await connectStripe();
+    const res = await fetch('/api/stripe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cartItems),
+    });
+    const data = await res.json();
+    console.log(data);
+    await stripe.redirectToCheckout({ sessionId: data.id });
+  };
+
   return (
     <CartWrapper
       as={motion.div}
@@ -72,7 +86,7 @@ const Cart = () => {
           {cartItems.length > 0 ? (
             <div>
               <h3>Subtotal ${totalPrice}</h3>
-              <button>Purchase</button>
+              <button onClick={handleCheckout}>Purchase</button>
             </div>
           ) : null}
         </Checkout>
