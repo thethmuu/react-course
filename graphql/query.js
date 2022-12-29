@@ -1,6 +1,6 @@
 export const GET_PRODUCTS = `
-  query {
-  products {
+  query getFilteredProducts($sort: [String], $pagination: PaginationArg, $filters: ProductFiltersInput) {
+  products(sort: $sort, pagination: $pagination, filters: $filters) {
     data {
       id
       attributes {
@@ -44,4 +44,18 @@ export const GET_PRODUCT = `
   }
 }
 
+`;
+
+export const GET_CATEGORIES = `
+query {
+  categories {
+    data {
+      id
+      attributes {
+        name
+        slug
+      }
+    }
+  }
+}
 `;

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import 'styles/globals.css';
 import { StateContextProvider } from 'lib/context';
 import Navbar from 'components/Navbar';
+import Footer from 'components/Footer';
 
 const client = createClient({ url: process.env.NEXT_PUBLIC_GRAPHQL_URL });
 
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }) {
         </Head>
         <Navbar />
         <Component {...pageProps} />
+        <Footer />
       </Provider>
     </StateContextProvider>
   );

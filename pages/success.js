@@ -4,7 +4,13 @@ const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export async function getServerSideProps(params) {
   console.log(params);
-  const order = await stripe.checkout.sessions.retrieve(params.query.sessionId);
+  const order = await stripe.checkout.sessions.retrieve(
+    params.query.sessionId,
+    {
+      expand: ['line_items'],
+    }
+  );
+  console.log(order);
 
   return {
     props: { order },
