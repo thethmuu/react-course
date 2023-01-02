@@ -4,6 +4,7 @@ import { GET_PRODUCTS } from 'graphql/query';
 import Product from 'components/Product';
 import Link from 'next/link';
 import Head from 'next/head';
+import UserLayout from 'components/layouts/UserLayout';
 
 export default function Home() {
   const [results] = useQuery({
@@ -33,43 +34,44 @@ export default function Home() {
   const lastestProducts = latestData.products.data;
 
   return (
-    <>
-      <main>
-        
-        <section>
-          <h1 className='mb-3 font-semibold text-center'>My Store</h1>
-          <ProductGallery>
-            {products.map((product) => (
-              <Product key={product.attributes.slug} product={product} />
-            ))}
-          </ProductGallery>
-          <div className='flex justify-center'>
-            <Link className='mt-3 btn btn-primary btn-sm' href='/products'>
-              See more
-            </Link>
-          </div>
-        </section>
-        <section className='mt-5'>
-          <h1 className='mb-3 font-semibold text-center'>Latest Products</h1>
-          <ProductGallery>
-            {lastestProducts.map((product) => (
-              <Product key={product.attributes.slug} product={product} />
-            ))}
-          </ProductGallery>
-          <div className='flex justify-center'>
-            <Link className='mt-3 btn btn-primary btn-sm' href='/products'>
-              See more
-            </Link>
-          </div>
-        </section>
-      </main>
-    </>
+    <main>
+      <section>
+        <h1 className='mb-3 font-semibold text-center'>My Store</h1>
+        <ProductGallery>
+          {products.map((product) => (
+            <Product key={product.attributes.slug} product={product} />
+          ))}
+        </ProductGallery>
+        <div className='flex justify-center'>
+          <Link className='mt-3 btn btn-primary btn-sm' href='/products'>
+            See more
+          </Link>
+        </div>
+      </section>
+      <section className='mt-5'>
+        <h1 className='mb-3 font-semibold text-center'>Latest Products</h1>
+        <ProductGallery>
+          {lastestProducts.map((product) => (
+            <Product key={product.attributes.slug} product={product} />
+          ))}
+        </ProductGallery>
+        <div className='flex justify-center'>
+          <Link className='mt-3 btn btn-primary btn-sm' href='/products'>
+            See more
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }
 
 const ProductGallery = styled.div`
-  display: grid;
+  /* display: grid; */
   /*  fraction  */
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  grid-gap: 2rem;
+  /* grid-template-columns: repeat(auto-fit, minmax(12rem, 18rem));
+  grid-gap: 2rem; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
 `;

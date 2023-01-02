@@ -5,9 +5,9 @@ const nextConfig = {
     styledComponents: true,
   },
   // for using with cloudinary image src and Next Image component
-  // images: {
-  //   domains: ['res.cloudinary.com'],
-  // },
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
 };
 
 module.exports = nextConfig;
