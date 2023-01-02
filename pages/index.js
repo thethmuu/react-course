@@ -34,8 +34,7 @@ export default function Home() {
 
   return (
     <>
-      <main>
-        
+      <main className='container mx-auto'>
         <section>
           <h1 className='mb-3 font-semibold text-center'>My Store</h1>
           <ProductGallery>
@@ -70,6 +69,7 @@ export default function Home() {
 const ProductGallery = styled.div`
   display: grid;
   /*  fraction  */
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 20rem));
   grid-gap: 2rem;
+  justify-content: center;
 `;

@@ -23,7 +23,7 @@ const ProductDetails = () => {
   const { url, width, height } = image.data.attributes.formats.medium;
 
   return (
-    <ProductDetailsStyled>
+    <ProductDetailsStyled className='container mx-auto'>
       {/* for Next Image component */}
       {/* <Image
         src={url}
@@ -56,7 +56,7 @@ const ProductDetails = () => {
 
 export default ProductDetails;
 
-const ProductDetailsStyled = styled.div`
+const ProductDetailsStyled = styled.main`
   display: flex;
   justify-content: space-between;
   margin-top: 5rem;

@@ -14,7 +14,7 @@ const Index = () => {
       ? {
           filters: {
             category: {
-              slug: { eq: selectedCategory ? selectedCategory : null },
+              slug: { eq: selectedCategory },
             },
           },
         }
@@ -31,10 +31,8 @@ const Index = () => {
     error: categoryError,
   } = categoryResults;
 
-  if (fetching || categoryFetching) return <p>Loading...</p>;
-  if (error || categoryError) return <p>Ugh.. {error.message}</p>;
-  const products = data.products.data;
-  const categories = categoryData.categories.data;
+  const products = data?.products.data;
+  const categories = categoryData?.categories.data;
   console.log(categories);
 
   function handleCategorySelect(category) {
@@ -43,30 +41,36 @@ const Index = () => {
   }
 
   return (
-    <main className='flex'>
+    <main className='container flex mx-auto'>
       <Head>
         <title>All Products by Category</title>
       </Head>
       <aside className='w-1/5'>
         <ul>
-          {categories.map((item) => (
-            <li
-              className='p-2 text-sm text-center border hover:cursor-pointer'
-              onClick={() => handleCategorySelect(item.attributes.slug)}
-              key={item.attributes.slug}
-            >
-              {item.attributes.name}
-            </li>
-          ))}
+          {categories
+            ? categories.map((item) => (
+                <li
+                  className='p-2 text-sm text-center border hover:cursor-pointer'
+                  onClick={() => handleCategorySelect(item.attributes.slug)}
+                  key={item.attributes.slug}
+                >
+                  {item.attributes.name}
+                </li>
+              ))
+            : null}
         </ul>
       </aside>
-      <div className='px-4'>
-        <section className='mt-5'>
+      <div className='w-full px-4'>
+        <section>
           <h1 className='mb-3 font-semibold text-center'>Products</h1>
           <ProductGallery>
-            {products.map((product) => (
-              <Product key={product.attributes.slug} product={product} />
-            ))}
+            {products ? (
+              products.map((product) => (
+                <Product key={product.attributes.slug} product={product} />
+              ))
+            ) : (
+              <p>Loading</p>
+            )}
           </ProductGallery>
         </section>
       </div>
@@ -79,6 +83,7 @@ export default Index;
 const ProductGallery = styled.div`
   display: grid;
   /*  fraction  */
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 20rem));
   grid-gap: 2rem;
+  justify-content: center;
 `;

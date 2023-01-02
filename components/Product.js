@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
@@ -8,7 +9,7 @@ const Product = ({ product }) => {
     <ProductStyled>
       <Link href={`/products/${slug}`}>
         <div>
-          <img src={image.data.attributes.formats.small.url} alt={title} />
+          <Image width="200" height="200" src={image.data.attributes.formats.small.url} alt={title} />
         </div>
       </Link>
       <h2>{title}</h2>

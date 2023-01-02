@@ -19,10 +19,10 @@ export async function getServerSideProps(params) {
 
 const Success = ({ order }) => {
   const router = useRouter();
-  console.log(order.customer_details);
+  console.log(order);
   return (
-    <div className='container'>
-      <div className='max-w-xl p-6 mx-auto leading-6 text-center bg-white rounded shadow-xl'>
+    <main className='container'>
+      <div className='max-w-xl p-6 mx-auto leading-10 text-center bg-white rounded shadow-xl'>
         <h1>Thank you for your purchase!</h1>
         <p>
           Email sent to:{' '}
@@ -44,13 +44,13 @@ const Success = ({ order }) => {
           {/* products */}
           <div className='mt-3'>
             <h3 className='font-semibold'>Products</h3>
-            {/* {order.line_items.map((item) => (
+            {order.line_items.data.map((item) => (
               <div key={item.id}>
                 <p>Product: {item.description}</p>
                 <p>Quantity: {item.quantity}</p>
                 <p>Price: {item.price.unit_amount}</p>
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
         <button
@@ -60,7 +60,7 @@ const Success = ({ order }) => {
           Continue Shopping
         </button>
       </div>
-    </div>
+    </main>
   );
 };
 

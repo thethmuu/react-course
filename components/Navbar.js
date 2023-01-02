@@ -12,7 +12,7 @@ import Cart from './Cart';
 const Navbar = () => {
   const { showCart, setShowCart, totalQuantity } = useStoreContext();
   return (
-    <NavStyled>
+    <NavStyled className='container mx-auto'>
       <Link href='/'>Y.E.C Store</Link>
       <NavItems>
         <li
