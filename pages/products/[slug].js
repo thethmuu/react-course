@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useQuery } from 'urql';
 import { useRouter } from 'next/router';
 import { GET_PRODUCT } from 'graphql/query';
@@ -8,14 +8,25 @@ import Image from 'next/image';
 import { useStoreContext } from 'lib/context';
 
 const ProductDetails = () => {
+  const [productQty, setProductQty] = useState(1);
   const { query } = useRouter();
-  const { productQty, cartItems, increaseQty, decreaseQty, handleOnAdd } =
+  const { cartItems, handleOnAdd } =
     useStoreContext();
 
   const [results] = useQuery({
     query: GET_PRODUCT,
     variables: { slug: query.slug },
   });
+
+  const increaseQty = () => setProductQty((prevState) => prevState + 1);
+  
+  const decreaseQty = () => {
+    setProductQty((prevState) => {
+      if (prevState - 1 < 1) return 1;
+      return prevState - 1;
+    });
+  };
+
   const { data, fetching, error } = results;
   if (fetching) return <p>Loading...</p>;
   if (error) return <p>Ugh.. {error.message}</p>;
