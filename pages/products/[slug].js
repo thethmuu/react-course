@@ -28,8 +28,8 @@ const ProductDetails = () => {
   };
 
   const { data, fetching, error } = results;
-  if (fetching) return <p>Loading...</p>;
-  if (error) return <p>Ugh.. {error.message}</p>;
+  if (fetching) return <main>Loading...</main>;
+  if (error) return <main>Ugh.. {error.message}</main>;
   const product = data.products.data[0].attributes;
   const { title, description, image, slug } = product;
   const { url, width, height } = image.data.attributes.formats.medium;
@@ -42,7 +42,7 @@ const ProductDetails = () => {
   return (
     <ProductDetailsStyled className='container mx-auto'>
       {/* for Next Image component */}
-      <Image src={url} alt={title} width={width} height={height} />
+      <Image className='w-1/3 rounded hover:shadow' src={url} alt={title} width={width} height={height} />
 
       <ProductInfo>
         <h2>{title}</h2>
@@ -69,11 +69,11 @@ export default ProductDetails;
 
 const ProductDetailsStyled = styled.main`
   display: flex;
-  justify-content: space-between;
-  margin-top: 5rem;
+  justify-content: space-around;
+  margin-top: 1rem;
 
   img {
-    width: 40%;
+    align-self: flex-start;
   }
 `;
 

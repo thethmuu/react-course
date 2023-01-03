@@ -28,22 +28,24 @@ export default function Home() {
     error: latestError,
   } = latest;
 
-  if (fetching || latestFetching) return <p>Loading...</p>;
-  if (error || latestError) return <p>Ugh.. {error.message}</p>;
-  const products = data.products.data;
-  const lastestProducts = latestData.products.data;
+  const products = data?.products.data;
+  const lastestProducts = latestData?.products.data;
 
   return (
     <main>
       <section>
         <h1 className='mb-3 font-semibold text-center'>My Store</h1>
         <ProductGallery>
-          {products.map((product) => (
-            <Product key={product.attributes.slug} product={product} />
-          ))}
+          {error ? (
+            <p>{error.message}</p>
+          ) : !fetching ? (
+            products.map((product) => (
+              <Product key={product.attributes.slug} product={product} />
+            ))
+          ) : null}
         </ProductGallery>
         <div className='flex justify-center'>
-          <Link className='mt-3 btn btn-primary btn-sm' href='/products'>
+          <Link className='mt-5 btn btn-primary btn-sm' href='/products'>
             See more
           </Link>
         </div>
@@ -51,12 +53,16 @@ export default function Home() {
       <section className='mt-5'>
         <h1 className='mb-3 font-semibold text-center'>Latest Products</h1>
         <ProductGallery>
-          {lastestProducts.map((product) => (
-            <Product key={product.attributes.slug} product={product} />
-          ))}
+          {latestError ? (
+            <p>{error.message}</p>
+          ) : !latestFetching ? (
+            lastestProducts.map((product) => (
+              <Product key={product.attributes.slug} product={product} />
+            ))
+          ) : null}
         </ProductGallery>
         <div className='flex justify-center'>
-          <Link className='mt-3 btn btn-primary btn-sm' href='/products'>
+          <Link className='mt-5 btn btn-primary btn-sm' href='/products'>
             See more
           </Link>
         </div>

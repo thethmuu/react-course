@@ -1,14 +1,15 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
 const Product = ({ product }) => {
-  const { title, price, image, slug } = product.attributes;
+  const { title, price, image, slug, width, height } = product.attributes;
   return (
-    <ProductStyled>
+    <ProductStyled className='transition rounded hover:shadow-lg'>
       <Link href={`/products/${slug}`}>
         <div>
-          <img src={image.data.attributes.formats.small.url} alt={title} />
+          <Image className='transition duration-300 hover:scale-105' width="240" height="240" src={image.data.attributes.formats.small.url} alt={title} />
         </div>
       </Link>
       <h2>{title}</h2>

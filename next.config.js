@@ -15,7 +15,7 @@ const nextConfig = {
   },
   // for using with cloudinary image src and Next Image component
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: ['res.cloudinary.com', 'lh3.googleusercontent.com'],
   },
 };
 

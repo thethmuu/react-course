@@ -42,12 +42,6 @@ const NavStyled = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  a {
-    text-decoration: none;
-    font-weight: 700;
-    color: var(--primary);
-  }
 `;
 
 const NavItems = styled.ul`

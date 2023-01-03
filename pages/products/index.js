@@ -58,7 +58,7 @@ const Index = () => {
           )}
         </ul>
       </aside>
-      <div className='px-4'>
+      <div className='w-full px-4'>
         <section className='mt-5'>
           <h1 className='mb-3 font-semibold text-center'>Products</h1>
           <ProductGallery>
