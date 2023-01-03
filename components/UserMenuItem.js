@@ -11,7 +11,7 @@ const UserMenuItem = () => {
   if (!user) {
     return (
       <div>
-        <Link href='/api/auth/login' className='btn'>
+        <Link href='/api/auth/login' className='text-white btn'>
           Login
         </Link>
       </div>
