@@ -6,7 +6,7 @@ export const getServerSideProps = withPageAuthRequired();
 
 const Profile = ({ user }) => {
   const router = useRouter();
-  console.log(user);
+  
   return (
     <main className='w-1/2 p-4 bg-white border rounded'>
       {user ? (
