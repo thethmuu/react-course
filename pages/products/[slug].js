@@ -5,13 +5,13 @@ import { GET_PRODUCT } from 'graphql/query';
 import styled from 'styled-components';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 import { useStoreContext } from 'lib/context';
 
 const ProductDetails = () => {
   const [productQty, setProductQty] = useState(1);
   const { query } = useRouter();
-  const { cartItems, handleOnAdd } =
-    useStoreContext();
+  const { cartItems, handleOnAdd } = useStoreContext();
 
   const [results] = useQuery({
     query: GET_PRODUCT,
@@ -19,7 +19,7 @@ const ProductDetails = () => {
   });
 
   const increaseQty = () => setProductQty((prevState) => prevState + 1);
-  
+
   const decreaseQty = () => {
     setProductQty((prevState) => {
       if (prevState - 1 < 1) return 1;
@@ -33,6 +33,11 @@ const ProductDetails = () => {
   const product = data.products.data[0].attributes;
   const { title, description, image, slug } = product;
   const { url, width, height } = image.data.attributes.formats.medium;
+
+  const handleAddToCart = () => {
+    handleOnAdd(product, productQty);
+    toast.success(`${title} added to cart!`, { duration: 1500});
+  };
 
   return (
     <ProductDetailsStyled className='container mx-auto'>
@@ -52,7 +57,7 @@ const ProductDetails = () => {
             <AiFillPlusCircle />
           </button>
         </Quantity>
-        <CartButtonStyled onClick={() => handleOnAdd(product, productQty)}>
+        <CartButtonStyled onClick={handleAddToCart}>
           Add to Cart
         </CartButtonStyled>
       </ProductInfo>

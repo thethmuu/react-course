@@ -22,6 +22,7 @@
     "next": "13.0.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
     "stripe": "^11.5.0",
     "styled-components": "^5.3.6",
