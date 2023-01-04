@@ -1,5 +1,5 @@
 ## Confession
-This repo is just my modified clone of Matt Pod's TypeScript beginner tutorial.
+This repo is just my modified clone of Matt Pocock's TypeScript beginner tutorial.
 
 ## Installation Instructions
 
