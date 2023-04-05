@@ -1,7 +1,7 @@
 import React from 'react';
 import { HiChevronUp, HiChevronDown } from 'react-icons/hi2';
 
-import { increase, decrease } from '../features/cart/cartSlice';
+import { increase, decrease, removeItem } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 
 const CartItem = ({ id, title, price, img, amount }) => {
@@ -19,12 +19,25 @@ const CartItem = ({ id, title, price, img, amount }) => {
             <HiChevronUp />
           </button>
           <p>{amount}</p>
-          <button onClick={() => dispatch(decrease(id))}>
+          <button
+            onClick={() => {
+              if (amount === 1) {
+                dispatch(removeItem(id));
+                return;
+              }
+              dispatch(decrease(id));
+            }}
+          >
             <HiChevronDown />
           </button>
         </div>
         <div className='justify-end card-actions'>
-          <button className='btn btn-primary'>Remove</button>
+          <button
+            onClick={() => dispatch(removeItem(id))}
+            className='btn btn-primary'
+          >
+            Remove
+          </button>
         </div>
       </div>
     </article>

@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className='relative'>
           <HiShoppingCart size='2em' />
           <div className='absolute flex items-center justify-center w-3 h-3 p-2 bg-white border border-black rounded-full -right-1 -top-1'>
-            <p className='text-sm text-black'>1</p>
+            <p className='text-sm text-black'>{totalAmount}</p>
           </div>
         </div>
       </div>

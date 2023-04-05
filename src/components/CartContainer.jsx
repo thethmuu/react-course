@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { clearCart } from '../features/cart/cartSlice';
@@ -13,8 +13,8 @@ const CartContainer = () => {
 
   if (totalAmount === 0) {
     return (
-      <section>
-        <h2>Your book cart</h2>
+      <section className='container mx-auto mt-5 text-center'>
+        <h2 className='text-2xl font-bold'>Your book cart</h2>
         <p>currently empty</p>
       </section>
     );
@@ -28,13 +28,13 @@ const CartContainer = () => {
           <CartItem key={item.id} {...item} />
         ))}
       </div>
-      <div>
-        <h4>
-          Total Price: <span>${totalPrice}</span>
+      <div className='my-4'>
+        <h4 className='text-right'>
+          Total Price: <span>${totalPrice.toFixed(2)}</span>
         </h4>
       </div>
       <button
-        className='btn btn-primary btn-sm'
+        className='my-4 btn btn-primary btn-sm'
         onClick={() => dispatch(clearCart())}
       >
         Clear Cart
