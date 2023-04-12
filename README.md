@@ -1,13 +1,21 @@
-# React Course
-Exercises and Projects for the CreaThit React Class
+Starter Setup for Your Next Project
+- React, Next.js, TailwidCSS, Next-Auth, Prisma, TypeScript
 
-## Projects included in the course
+## Sample .env file
+DATABASE_URL="file:./dev.db"<br>
+EMAIL_SERVER=smtp://user:pass@smtp.mailtrap.io:465<br>
+EMAIL_FROM=Your name <you@email.com><br>
+NEXTAUTH_URL=http://localhost:3000<br>
+SECRET=<ENTER A UNIQUE STRING HERE>
 
-- Simple Reddit Page
-- Hacker News Soft Clone
-- Restaurant Menu App
-- [Baskball Teams App](https://github.com/thethmuu/react-course/tree/basketball-teams-app)
-- [Full-Stack eCommerce Store](https://github.com/thethmuu/react-course/tree/store-frontend)
-- [Novel Book Store with Redux Toolkit](https://github.com/thethmuu/react-course/tree/novel-book-store-final)
+### Generate secret code
+[Click this link to generate](https://generate-secret.vercel.app/32)
 
-Go to respective branches and get the source code.
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
