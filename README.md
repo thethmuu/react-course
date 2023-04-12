@@ -1,5 +1,8 @@
-Starter Setup for Your Next Project
+Full-stack job board
 - React, Next.js, TailwidCSS, Next-Auth, Prisma, TypeScript
+
+## Finished App Screenshot
+![App Screenshot](https://i.ibb.co/KD59Y9C/Screenshot-2023-04-11-at-16-04-09-Software-Developer-Jobs-in-Japan.png)
 
 ## Sample .env file
 DATABASE_URL="file:./dev.db"<br>
