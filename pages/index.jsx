@@ -2,24 +2,26 @@ import Link from 'next/link';
 import { getJobs } from '@/lib/getData';
 import prisma from '@/lib/prisma';
 
-export default function Home({ jobs }) {
-  return (
-    <main className='text-center'>
-      <section>
-        <h2>Software Developer Jobs</h2>
-        {jobs.map((job) => (
-          <h3 key={job.id}>{job.title}</h3>
-        ))}
-      </section>
+import Layout from '@/components/Layout';
+import Jobs from '@/components/Jobs';
+import { Button } from '@tremor/react';
+import { useSession } from 'next-auth/react';
 
-      {/* <h1>Home page</h1>
-      <Link
-        className='text-blue-600 hover:underline hover:text-blue-700'
-        href='/api/auth/signin'
-      >
-        login
-      </Link> */}
-    </main>
+export default function Home({ jobs }) {
+  const { data: session, status } = useSession();
+
+  return (
+    <Layout>
+      <section className='text-center'>
+        {!session ? (
+          <Link href='/api/auth/signin'>
+            <Button color='green'>Login</Button>
+          </Link>
+        ) : null}
+        <h2 className='text-5xl font-bold'>Software Developer Jobs</h2>
+        <Jobs jobs={jobs} />
+      </section>
+    </Layout>
   );
 }
 
