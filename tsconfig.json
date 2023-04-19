@@ -18,6 +18,15 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/prisma.js", "pages/api/auth/[...nextauth].js", "pages/index.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.js",
+    "**/*.tsx",
+    "**/*.jsx",
+    "lib/prisma.js",
+    "pages/api/auth/[...nextauth].js",
+    "pages/index.jsx"
+  ],
   "exclude": ["node_modules"]
 }

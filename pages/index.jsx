@@ -6,9 +6,17 @@ import Layout from '@/components/Layout';
 import Jobs from '@/components/Jobs';
 import { Button } from '@tremor/react';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 export default function Home({ jobs }) {
   const { data: session, status } = useSession();
+  const router = useRouter()
+
+  if (session && !session.user.name) {
+    router.push('/setup')
+  }
+
+  
 
   return (
     <Layout>

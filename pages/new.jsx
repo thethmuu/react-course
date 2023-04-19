@@ -3,6 +3,7 @@ import Layout from '@/components/Layout';
 import { Button, TextInput } from '@tremor/react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 export default function New() {
   const {
@@ -10,10 +11,10 @@ export default function New() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { data: session } = useSession();
 
   async function onSubmit(data) {
-    await axios.post('/api/jobs', data);
-    console.log(data);
+    await axios.post('/api/jobs', { ...data, userId: session.user.id });
   }
 
   return (

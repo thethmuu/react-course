@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   // console.log(session);
 
   if (req.method === 'POST') {
-    const { title, description, location, salary } = req.body;
+    const { title, description, location, salary, userId } = req.body;
     await prisma.job.create({
       data: {
         title,
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         location,
         salary,
         author: {
-          connect: { id: 'clgm8thco0000gppk3otghmex' },
+          connect: { id: userId },
         },
       },
     });
