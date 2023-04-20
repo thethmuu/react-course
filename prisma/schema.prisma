@@ -21,8 +21,10 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
-  job Job[]
-  isCompany Boolean @default(false)
+  job           Job[]
+  isCompany     Boolean   @default(false)
+
+  Application Application[]
 }
 
 model VerificationToken {
@@ -39,8 +41,8 @@ model Account {
   type               String
   provider           String
   providerAccountId  String
-  refresh_token      String?  
-  access_token       String?  
+  refresh_token      String?
+  access_token       String?
   expires_at         Int?
   token_type         String?
   scope              String?
@@ -63,13 +65,25 @@ model Session {
 }
 
 model Job {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  title String?
-  description String?
-  salary String?
-  location String?
-  published Boolean @default(true)
+  id           Int           @id @default(autoincrement())
+  createdAt    DateTime      @default(now())
+  title        String?
+  description  String?
+  salary       String?
+  location     String?
+  published    Boolean       @default(true)
+  authorId     String
+  author       User          @relation(fields: [authorId], references: [id])
+  applications Application[]
+}
+
+model Application {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  coverletter String
+
+  jobId    Int
+  job      Job    @relation(fields: [jobId], references: [id])
   authorId String
-  author User @relation(fields: [authorId], references: [id])
+  author   User   @relation(fields: [authorId], references: [id])
 }
