@@ -1,6 +1,6 @@
 import Job from '@/components/Job';
 import Layout from '@/components/Layout';
-import { getCompany, getCompanyJobs } from '@/lib/getData';
+import { getUser, getCompanyJobs } from '@/lib/getData';
 import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import React from 'react';
@@ -28,7 +28,7 @@ export default function CompanyDetail({ company, jobs }) {
 }
 
 export async function getServerSideProps({ params }) {
-  let company = await getCompany(params.id, prisma);
+  let company = await getUser(params.id, prisma);
   let jobs = await getCompanyJobs(params.id, prisma);
 
   company = JSON.parse(JSON.stringify(company));

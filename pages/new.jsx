@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Button, TextInput } from '@tremor/react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 export default function New() {
   const {
@@ -12,9 +13,15 @@ export default function New() {
     formState: { errors },
   } = useForm();
   const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   async function onSubmit(data) {
+    setLoading(true);
     await axios.post('/api/jobs', { ...data, userId: session.user.id });
+    setLoading(false);
+
+    router.push('/dashboard');
   }
 
   return (
@@ -27,22 +34,28 @@ export default function New() {
             className='mt-1'
             placeholder='Job title'
           ></TextInput>
-          <textarea
-            {...register('description', { required: true })}
-            className='mt-1'
-            placeholder='Job title'
-          ></textarea>
+
           <TextInput
             {...register('salary', { required: true })}
-            className='mt-1'
-            placeholder='Job title'
+            className='mt-4'
+            placeholder='salary'
           ></TextInput>
+
           <TextInput
             {...register('location', { required: true })}
-            className='mt-1'
-            placeholder='Job title'
+            className='mt-4'
+            placeholder='Location'
           ></TextInput>
-          <Button>Save</Button>
+
+          <textarea
+            {...register('description', { required: true })}
+            className='w-full px-4 py-2 mt-4 text-sm font-medium bg-transparent border rounded outline-none focus:ring-blue-200 focus:ring'
+            placeholder='Job description'
+          ></textarea>
+
+          <Button loading={loading} color='indigo' className='mt-4'>
+            Save
+          </Button>
         </form>
       </section>
     </Layout>
