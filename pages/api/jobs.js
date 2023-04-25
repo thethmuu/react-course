@@ -28,5 +28,20 @@ export default async function handler(req, res) {
     return res.status(201).end();
   }
 
+  if (req.method === 'PATCH') {
+    const { id, task } = req.body;
+
+    await prisma.job.update({
+      where: {
+        id: parseInt(id),
+      },
+      data: {
+        published: task === 'publish' ? true : false,
+      },
+    });
+
+    return res.status(200).end();
+  }
+
   return res.status(501).json({ message: 'Method not allowed!' });
 }

@@ -91,9 +91,6 @@ export async function getServerSideProps(context) {
   let jobs = await getJobs(prisma);
   jobs = JSON.parse(JSON.stringify(jobs));
 
-  let user = await getUser(session.user.id, prisma);
-  user = JSON.parse(JSON.stringify(user));
-
   if (!session) {
     return {
       props: {
@@ -101,6 +98,9 @@ export async function getServerSideProps(context) {
       },
     };
   }
+
+  let user = await getUser(session.user.id, prisma);
+  user = JSON.parse(JSON.stringify(user));
 
   return {
     props: {

@@ -10,6 +10,7 @@ import {
   TableCell,
   Text,
   Title,
+  Button,
 } from '@tremor/react';
 import { getServerSession } from 'next-auth/next';
 
@@ -19,11 +20,24 @@ import { getJobsPosted, getUser, getUserApplications } from '@/lib/getData';
 import { authOptions } from './api/auth/[...nextauth]';
 import prisma from '@/lib/prisma';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function Dashboard({ user, jobs, applications }) {
-  console.log(applications);
+  console.log(jobs);
 
   const { data: session } = useSession();
+  const router = useRouter()
+
+  async function handleClick(task, jobId) {
+    await axios.patch('/api/jobs', {
+      id: jobId,
+      task: task,
+    });
+
+    router.push(window.location.pathname)
+  }
 
   return (
     <Layout>
@@ -49,6 +63,7 @@ export default function Dashboard({ user, jobs, applications }) {
                   <TableHeaderCell>Title</TableHeaderCell>
                   <TableHeaderCell>Description</TableHeaderCell>
                   <TableHeaderCell>Status</TableHeaderCell>
+                  <TableHeaderCell>Applications</TableHeaderCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -60,9 +75,28 @@ export default function Dashboard({ user, jobs, applications }) {
                     </TableCell>
                     <TableCell>
                       {item.published ? (
-                        <Badge color='green'>Published</Badge>
+                        <Badge
+                          className='cursor-pointer'
+                          onClick={() => handleClick('unpublish', item.id)}
+                          color='green'
+                        >
+                          Published
+                        </Badge>
                       ) : (
-                        <Badge color='red'>Unpublished</Badge>
+                        <Badge
+                          className='cursor-pointer'
+                          onClick={() => handleClick('publish', item.id)}
+                          color='red'
+                        >
+                          Unpublished
+                        </Badge>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {item.applications.length > 0 ? (
+                        <p>{item.applications.length}applications</p>
+                      ) : (
+                        <p>No application so far </p>
                       )}
                     </TableCell>
                   </TableRow>
@@ -70,7 +104,28 @@ export default function Dashboard({ user, jobs, applications }) {
               </TableBody>
             </Table>
           </Card>
-        ) : null}
+        ) : (
+          <>
+            {applications.map((item, index) => (
+              <div
+                className='flex justify-center gap-6 mt-10 mb-4'
+                key={item.id}
+              >
+                <Card className='w-full px-4 sm:w-1/2'>
+                  <Link
+                    className='text-xl font-bold underline'
+                    href={`/jobs/${item.job.id}`}
+                  >
+                    {item.job.title}
+                  </Link>
+                  <p className='mt-3 text-base font-normal'>
+                    {item.coverletter}
+                  </p>
+                </Card>
+              </div>
+            ))}
+          </>
+        )}
       </section>
     </Layout>
   );
