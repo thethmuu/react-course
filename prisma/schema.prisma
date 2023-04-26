@@ -75,6 +75,9 @@ model Job {
   authorId     String
   author       User          @relation(fields: [authorId], references: [id])
   applications Application[]
+
+  categoryId Int  @default(1)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
 
 model Application {
@@ -86,4 +89,11 @@ model Application {
   job      Job    @relation(fields: [jobId], references: [id])
   authorId String
   author   User   @relation(fields: [authorId], references: [id])
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  jobs Job[]
 }

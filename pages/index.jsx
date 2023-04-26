@@ -4,18 +4,18 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { getServerSession } from 'next-auth/next';
 
-import { getJobs, getUser } from '@/lib/getData';
+import { getCategories, getJobs, getUser } from '@/lib/getData';
 import prisma from '@/lib/prisma';
 import { authOptions } from './api/auth/[...nextauth]';
 
 import Layout from '@/components/Layout';
 import Jobs from '@/components/Jobs';
 
-export default function Home({ jobs, user }) {
+export default function Home({ jobs, user, categories }) {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  console.log(user);
+  console.log(categories);
 
   if (session && !session.user.name) {
     router.push('/setup');
@@ -57,26 +57,20 @@ export default function Home({ jobs, user }) {
         ) : null}
       </section>
 
-      <section className='flex gap-4'>
+      <section className='flex flex-col-reverse gap-4 sm:flex-row'>
         <Jobs jobs={jobs} />
-        <aside className='w-80'>
+        <aside className='w-full sm:w-80'>
           <Card>
             <Title>Browse by Category</Title>
             <List>
-              <ListItem>
-                <span>Front-end</span>
-                <span>12</span>
-              </ListItem>
-
-              <ListItem>
-                <span>Back-end</span>
-                <span>8</span>
-              </ListItem>
-
-              <ListItem>
-                <span>UI/UX Designer</span>
-                <span>9</span>
-              </ListItem>
+              {categories.map((category) => (
+                <ListItem key={category.id}>
+                  <Link href={`/jobs/category/${category.id}`}>
+                    {category.name}
+                  </Link>
+                  <span>{category.jobs.length}</span>
+                </ListItem>
+              ))}
             </List>
           </Card>
         </aside>
@@ -91,10 +85,14 @@ export async function getServerSideProps(context) {
   let jobs = await getJobs(prisma);
   jobs = JSON.parse(JSON.stringify(jobs));
 
+  let categories = await getCategories(prisma);
+  categories = JSON.parse(JSON.stringify(categories));
+
   if (!session) {
     return {
       props: {
         jobs,
+        categories,
       },
     };
   }
@@ -106,6 +104,7 @@ export async function getServerSideProps(context) {
     props: {
       jobs,
       user,
+      categories,
     },
   };
 }
