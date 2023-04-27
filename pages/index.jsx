@@ -57,7 +57,7 @@ export default function Home({ jobs, user, categories }) {
         ) : null}
       </section>
 
-      <section className='flex flex-col-reverse gap-4 sm:flex-row'>
+      <section className='flex flex-col-reverse gap-4 mt-6 sm:flex-row'>
         <Jobs jobs={jobs} />
         <aside className='w-full sm:w-80'>
           <Card>
