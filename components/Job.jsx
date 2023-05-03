@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Job({ job }) {
   return (
-    <Card decoration='top' decorationColor='green'>
+    <Card decoration='top' decorationColor='indigo'>
       <Link
         href={`/jobs/${job.id}`}
         className='text-xl font-semibold underline'

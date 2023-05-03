@@ -15,8 +15,6 @@ export default function Home({ jobs, user, categories }) {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  console.log(categories);
-
   if (session && !session.user.name) {
     router.push('/setup');
   }
@@ -24,15 +22,12 @@ export default function Home({ jobs, user, categories }) {
   return (
     <Layout>
       <section className='text-center'>
-        {!session ? (
-          <Link href='/api/auth/signin'>
-            <Button color='green'>Login</Button>
-          </Link>
-        ) : null}
-        <h2 className='text-5xl font-bold'>Software Developer Jobs</h2>
+        <h2 className='text-3xl font-bold sm:text-5xl'>
+          Software Developer Jobs
+        </h2>
 
         {session ? (
-          <section className='mx-auto my-10 text-center'>
+          <section className='mx-auto my-8 text-center'>
             <h3>
               Welcome, {user.name}{' '}
               {user.isCompany ? <Badge>Company</Badge> : null}
@@ -41,15 +36,15 @@ export default function Home({ jobs, user, categories }) {
               {user.isCompany ? (
                 <>
                   <Link href='/new'>
-                    <Button>Post a New Job</Button>
+                    <Button color='indigo'>Post a New Job</Button>
                   </Link>
                   <Link href='/dashboard'>
-                    <Button>View Jobs You Posted</Button>
+                    <Button color='indigo'>View Jobs You Posted</Button>
                   </Link>
                 </>
               ) : (
                 <Link href='/dashboard'>
-                  <Button>View Jobs You Applied To</Button>
+                  <Button color='indigo'>View Jobs You Applied To</Button>
                 </Link>
               )}
             </div>
@@ -57,9 +52,9 @@ export default function Home({ jobs, user, categories }) {
         ) : null}
       </section>
 
-      <section className='flex flex-col-reverse gap-4 mt-6 sm:flex-row'>
+      <section className='flex flex-col-reverse gap-6 mt-6 sm:flex-row'>
         <Jobs jobs={jobs} />
-        <aside className='w-full sm:w-80'>
+        <aside className='w-full sm:w-96'>
           <Card>
             <Title>Browse by Category</Title>
             <List>

@@ -38,21 +38,21 @@ export default function Setup() {
             error={errors.name}
           ></TextInput>
 
-          <div className='mt-4'>
-            <label htmlFor='isCompany'>Are you a company?</label>
+          <div className='flex gap-2 mt-4'>
             <input
               className='block p-1 mt-1'
               type='checkbox'
               id='isCompany'
               {...register('isCompany', { required: false })}
             />
+            <label htmlFor='isCompany'>Are you a company?</label>
           </div>
 
           <Button
             // loading={loading}
             type='submit'
             className='mt-4'
-            color='green'
+            color='indigo'
           >
             Save
           </Button>

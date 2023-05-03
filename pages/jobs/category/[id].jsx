@@ -9,7 +9,7 @@ export default function Category({ jobs }) {
   console.log(router.query.id);
   return (
     <Layout>
-      <h2 className='text-3xl font-bold text-center'>Jobs by Category</h2>
+      <h2 className='mb-8 text-3xl font-bold text-center'>Jobs by Category</h2>
       {jobs.length > 0 ? <Jobs jobs={jobs} /> : <p className='mt-4 text-center'>No job for this category</p>}
     </Layout>
   );

@@ -1,7 +1,8 @@
 import prisma from '@/lib/prisma';
 import { faker } from '@faker-js/faker';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-function generateFakeJob(user) {
+function generateFakeJob(user: Record<string, any>) {
   return {
     title: faker.name.jobTitle(),
     description: faker.lorem.paragraphs(),
@@ -11,7 +12,10 @@ function generateFakeJob(user) {
   };
 }
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'POST') {
     return res.end();
   }
@@ -41,7 +45,7 @@ export default async function handler(req, res) {
       },
     });
 
-    users.forEach(async (user) => {
+    users.forEach(async (user: Record<string, any>) => {
       await prisma.job.create({
         data: generateFakeJob(user),
       });
@@ -59,4 +63,6 @@ export default async function handler(req, res) {
       data: generateFakeJob(users[0]),
     });
   }
+
+  res.status(200).end();
 }
