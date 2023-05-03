@@ -59,7 +59,7 @@ export default function Home({ jobs, user, categories }) {
             <Title>Browse by Category</Title>
             <List>
               {categories.map((category) => (
-                <ListItem key={category.id}>
+                <ListItem className='py-3' key={category.id}>
                   <Link href={`/jobs/category/${category.id}`}>
                     {category.name}
                   </Link>

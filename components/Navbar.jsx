@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className='container flex justify-between p-4 mx-auto text-white bg-neutral-900 sm:px-8'>
         <Link href='/'>
           <h1 className='text-2xl font-bold w-fit hover:text-gray-400'>
-            TokyoDev
+            {'{ TokyoDev }'}
           </h1>
         </Link>
         {session && status === 'authenticated' ? (
